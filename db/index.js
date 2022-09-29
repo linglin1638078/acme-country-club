@@ -50,8 +50,8 @@ const Booking = db.define("booking", {
 
 // A member has one other member as a sponsor.
 // A member can have many other members sponsored by them.
-Member.belongsTo(Member);
-Member.hasMany(Member, { foreignKey: "sponsorId", as: "sponsor" });
+Member.belongsTo(Member,{as:'sponsor', foreignKey:'sponsorId'});
+Member.hasMany(Member, {as: 'sponsees' });
 
 // A booking has one member as the booker.
 // A member can have many bookings.
