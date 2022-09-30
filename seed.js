@@ -51,10 +51,10 @@ const seed = async () => {
         bookerId: moe.id,
         facilityId: tennis.id
     })
-    console.log(moe.id === ethyl.sponsorId)
-    console.log(lucy.id === moe.sponsorId);
+    
     console.log((await Member.findAll()).map(member => member.id));
     console.log((await Member.findAll()).map(member => member.sponsorId));
+    console.log((await Booking.findAll()).map(booking => booking.bookerId));
    
 
 }

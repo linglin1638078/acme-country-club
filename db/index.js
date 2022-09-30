@@ -40,12 +40,6 @@ const Booking = db.define("booking", {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4
 	},
-	bookerId: {
-		type: Sequelize.UUID,
-	},
-	facilityId: {
-		type: Sequelize.UUID,
-	},
 });
 
 // A member has one other member as a sponsor.
@@ -56,7 +50,7 @@ Member.hasMany(Member, {as: 'sponsees' });
 // A booking has one member as the booker.
 // A member can have many bookings.
 Member.hasMany(Booking);
-Booking.belongsTo(Member);
+Booking.belongsTo(Member, { as: 'booker' });
 
 // A booking has one facility.
 // A facility can have many bookings.
