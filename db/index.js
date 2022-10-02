@@ -11,7 +11,6 @@ const db = new Sequelize(DB_URL);
 const Member = db.define("member", {
 	name: {
 		type: Sequelize.STRING(20),
-		allowNull: false,
 		unique: true,
 	},
 	id: {
@@ -24,7 +23,6 @@ const Member = db.define("member", {
 const Facility = db.define("facility", {
 	name: {
 		type: Sequelize.STRING(20),
-		allowNull: false,
 		unique: true,
 	},
 	id: {
@@ -44,17 +42,17 @@ const Booking = db.define("booking", {
 
 // A member has one other member as a sponsor.
 // A member can have many other members sponsored by them.
-Member.belongsTo(Member,{as:'sponsor', foreignKey:'sponsorId'});
-Member.hasMany(Member, {as: 'sponsees' });
+Member.belongsTo(Member,{as:'sponsor', foreignKey:'sponsorId'});//memberId ---> sponserId
+Member.hasMany(Member, {as: 'sponsees', foreignKey:'sponsorId' });
 
 // A booking has one member as the booker.
 // A member can have many bookings.
 Member.hasMany(Booking);
-Booking.belongsTo(Member, { as: 'booker' });
+Booking.belongsTo(Member, { as: 'booker' });//memberId-->bookerId
 
 // A booking has one facility.
 // A facility can have many bookings.
 Facility.hasMany(Booking);
-Booking.belongsTo(Facility);
+Booking.belongsTo(Facility);//facilityId
 
 module.exports = { db, Member, Booking, Facility };
